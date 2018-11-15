@@ -3,6 +3,14 @@
     "description": "Extends PHP's DateTime class by SAP week, date and timestamp format.",
     "type": "library",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Gregor J."
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/the-kbA-team/sap-datetime/issues"
+    },
     "keywords": [
         "PHPSAP",
         "DateTime",
