@@ -1,0 +1,23 @@
+{
+    "name": "kba-team/sap-datetime",
+    "description": "Extends PHP's DateTime class by SAP week, date and timestamp format.",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "kbATeam\\SapDateTime\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\kbATeam\\SapDateTime\\": "tests/"
+        }
+    }
+}
