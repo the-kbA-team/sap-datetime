@@ -71,7 +71,6 @@ class SapDateTime extends \DateTime
      * @param \DateTimeZone $timezone A DateTimeZone object representing the desired
      *                                time zone.
      * @return \DateTime|boolean
-     *
      * @throws \Exception
      *
      * @link https://php.net/manual/en/datetime.createfromformat.php
@@ -84,8 +83,11 @@ class SapDateTime extends \DateTime
         if ($format === static::SAP_WEEK) {
             return static::createFromSapWeek($time, $timezone);
         }
-        // @codeCoverageIgnoreStart
+        if ($timezone === null) {
+            return parent::createFromFormat($format, $time);
+        }
+        //@codeCoverageIgnoreStart
         return parent::createFromFormat($format, $time, $timezone);
-        // @codeCoverageIgnoreEnd
+        //@codeCoverageIgnoreEnd
     }
 }
