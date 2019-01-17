@@ -17,6 +17,8 @@ Extends PHP's DateTime class by SAP week, date and timestamp format.
 composer require kba-team/sap-datetime:~1.0.0
 ```
 
+### Parse a SAP week string into a DateTime object. 
+
 ```php
 <?php
 use kbATeam\SapDateTime\SapDateTime;
@@ -24,6 +26,66 @@ $dateTime = SapDateTime::createFromFormat(SapDateTime::SAP_WEEK, '201846');
 echo $dateTime->format('o \w\e\ek W') . PHP_EOL;
 /**
  * Output: 2018 week 46
+ */
+```
+
+### Format a DateTime object as SAP week string
+
+```php
+<?php
+use kbATeam\SapDateTime\SapDateTime;
+$dateTime = new SapDateTime('2018-10-19 08:09:10');
+echo $dateTime->format(SapDateTime::SAP_WEEK) . PHP_EOL;
+/**
+ * Output: 201842
+ */
+```
+
+### Parse a SAP date string into a DateTime object
+
+```php
+<?php
+use kbATeam\SapDateTime\SapDateTime;
+$dateTime = SapDateTime::createFromFormat(SapDateTime::SAP_DATE, '20181101');
+echo $dateTime->format('Y-m-d') . PHP_EOL;
+/**
+ * Output: 2018-11-01
+ */
+```
+
+### Format a DateTime object as SAP date
+
+```php
+<?php
+use kbATeam\SapDateTime\SapDateTime;
+$dateTime = new SapDateTime('2018-12-31 09:10:11');
+echo $dateTime->format(SapDateTime::SAP_DATE) . PHP_EOL;
+/**
+ * Output: 20181231
+ */
+```
+
+### Parse a SAP timestamp into a DateTime object
+
+```php
+<?php
+use kbATeam\SapDateTime\SapDateTime;
+$dateTime = SapDateTime::createFromFormat(SapDateTime::SAP_TIMESTAMP, '20181019080910');
+echo $dateTime->format('Y-m-d H:i:s') . PHP_EOL;
+/**
+ * Output: 2018-10-19 08:09:10
+ */
+```
+
+### Format a DateTime object as SAP timestamp
+
+```php
+<?php
+use kbATeam\SapDateTime\SapDateTime;
+$dateTime = new SapDateTime('2018-12-31 09:10:11');
+echo $dateTime->format(SapDateTime::SAP_TIMESTAMP) . PHP_EOL;
+/**
+ * Output: 20181231091011
  */
 ```
 
