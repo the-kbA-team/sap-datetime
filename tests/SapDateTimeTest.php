@@ -1,6 +1,6 @@
 <?php
 /**
- * File src/SapDateTimeTest.php
+ * File tests/SapDateTimeTest.php
  *
  * Test SapDateTime class.
  *
@@ -48,8 +48,9 @@ class SapDateTimeTest extends \PHPUnit_Framework_TestCase
      * @param string $sapWeek  The SAP week string.
      * @param string $expected The expected week in format <year>W<week>.
      * @dataProvider validSapWeeks
+     * @throws \Exception
      */
-    public function testSapWeeks($sapWeek, $expected)
+    public function testParseSapWeeks($sapWeek, $expected)
     {
         $dateTime = SapDateTime::createFromFormat(SapDateTime::SAP_WEEK, $sapWeek);
         static::assertInstanceOf(\DateTime::class, $dateTime);
@@ -76,10 +77,42 @@ class SapDateTimeTest extends \PHPUnit_Framework_TestCase
      *
      * @param string $sapWeek  The SAP week string.
      * @dataProvider invalidSapWeeks
+     * @throws \Exception
      */
-    public function testInvalidSapWeeks($sapWeek)
+    public function testParseInvalidSapWeeks($sapWeek)
     {
         $dateTime = SapDateTime::createFromFormat(SapDateTime::SAP_WEEK, $sapWeek);
         static::assertFalse($dateTime);
+    }
+
+    /**
+     * Data provider of timestamps and their according SAP week strings.
+     * @return array
+     */
+    public static function timestampsAndSapWeeks()
+    {
+        return [
+            ['2018-10-19 08:09:10', '201842'],
+            ['1907-12-31 09:10:11', '190801'],
+            ['1908-12-31 10:11:12', '190853'],
+            ['1909-12-31 11:12:13', '190952'],
+            ['1910-12-31 12:13:14', '191052'],
+            ['1911-12-31 12:13:14', '191152'],
+            ['1912-12-31 12:13:14', '191301']
+        ];
+    }
+
+    /**
+     * Test formatting timestamps to SAP week strings.
+     * @param string $timestamp Timestamp string
+     * @param string $expected SAP week string
+     * @throws \Exception
+     * @dataProvider timestampsAndSapWeeks
+     */
+    public function testCreateSapWeeks($timestamp, $expected)
+    {
+        $dateTime = new SapDateTime($timestamp);
+        $sapWeekString = $dateTime->format(SapDateTime::SAP_WEEK);
+        static::assertSame($expected, $sapWeekString);
     }
 }
