@@ -11,8 +11,6 @@
 
 namespace kbATeam\SapDateTime;
 
-use DateTimeZone;
-
 /**
  * Class kbATeam\SapDateTime\SapDateTime
  *
@@ -54,7 +52,7 @@ class SapDateTime extends \DateTime
      * @return \DateTime|boolean
      * @throws \Exception
      */
-    public static function createFromSapWeek($sapWeek, DateTimeZone $timezone = null)
+    public static function createFromSapWeek($sapWeek, $timezone = null)
     {
         if (preg_match(static::$sapWeekRegex, $sapWeek, $matches) !== 1) {
             return false;
@@ -78,7 +76,7 @@ class SapDateTime extends \DateTime
     public static function createFromFormat(
         $format,
         $time,
-        DateTimeZone $timezone = null
+        $timezone = null
     ) {
         if ($format === static::SAP_WEEK) {
             return static::createFromSapWeek($time, $timezone);
