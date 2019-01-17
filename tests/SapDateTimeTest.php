@@ -115,4 +115,60 @@ class SapDateTimeTest extends \PHPUnit_Framework_TestCase
         $sapWeekString = $dateTime->format(SapDateTime::SAP_WEEK);
         static::assertSame($expected, $sapWeekString);
     }
+
+    /**
+     * Data provider of SAP dates and their ISO date representations.
+     * @return array
+     */
+    public static function sapDatesAndIsoDates()
+    {
+        return [
+            ['20181101', '2018-11-01'],
+            ['19071231', '1907-12-31'],
+            ['19080101', '1908-01-01'],
+            ['19091201', '1909-12-01'],
+            ['19100110', '1910-01-10']
+        ];
+    }
+
+    /**
+     * Test parsing SAP dates
+     * @param string $sapDate
+     * @param string $isoDate
+     * @throws \Exception
+     * @dataProvider sapDatesAndIsoDates
+     */
+    public function testParseSapDates($sapDate, $isoDate)
+    {
+        $dateTime = SapDateTime::createFromFormat(SapDateTime::SAP_DATE, $sapDate);
+        static::assertSame($isoDate, $dateTime->format('Y-m-d'));
+    }
+
+    /**
+     * Data provider of timestamps and their according SAP dates
+     * @return array
+     */
+    public static function timestampsAndSapDates()
+    {
+        return [
+            ['2018-12-21 10:11:12', '20181221'],
+            ['1907-12-31 09:10:11', '19071231'],
+            ['1908-01-01 10:11:12', '19080101'],
+            ['1909-12-01 11:12:13', '19091201'],
+            ['1910-01-10 12:13:14', '19100110'],
+        ];
+    }
+
+    /**
+     * Test formatting DateTime objects as SAP dates.
+     * @param string $timestamp
+     * @param string $sapDate
+     * @throws \Exception
+     * @dataProvider timestampsAndSapDates
+     */
+    public function testCreateSapDates($timestamp, $sapDate)
+    {
+        $dateTime = new SapDateTime($timestamp);
+        static::assertSame($sapDate, $dateTime->format(SapDateTime::SAP_DATE));
+    }
 }
