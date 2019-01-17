@@ -11,6 +11,8 @@
 
 namespace kbATeam\SapDateTime;
 
+use DateTimeZone;
+
 /**
  * Class kbATeam\SapDateTime\SapDateTime
  *
@@ -46,12 +48,13 @@ class SapDateTime extends \DateTime
     /**
      * Parse an SAP week string into a new DateTime object.
      *
-     * @param string $sapWeek  String representing the SAP week.
-     * @param object $timezone A DateTimeZone object representing the desired
+     * @param string        $sapWeek  String representing the SAP week.
+     * @param \DateTimeZone $timezone A DateTimeZone object representing the desired
      *                                time zone.
      * @return \DateTime|boolean
+     * @throws \Exception
      */
-    public static function createFromSapWeek($sapWeek, $timezone)
+    public static function createFromSapWeek($sapWeek, DateTimeZone $timezone = null)
     {
         if (preg_match(static::$sapWeekRegex, $sapWeek, $matches) !== 1) {
             return false;
@@ -63,18 +66,20 @@ class SapDateTime extends \DateTime
     /**
      * Parse a string into a new DateTime object according to the specified format.
      *
-     * @param string $format   Format accepted by date().
-     * @param string $time     String representing the time.
-     * @param object $timezone A DateTimeZone object representing the desired
-     *                         time zone.
+     * @param string        $format   Format accepted by date().
+     * @param string        $time     String representing the time.
+     * @param \DateTimeZone $timezone A DateTimeZone object representing the desired
+     *                                time zone.
      * @return \DateTime|boolean
+     *
+     * @throws \Exception
      *
      * @link https://php.net/manual/en/datetime.createfromformat.php
      */
     public static function createFromFormat(
         $format,
         $time,
-        $timezone = null
+        DateTimeZone $timezone = null
     ) {
         if ($format === static::SAP_WEEK) {
             return static::createFromSapWeek($time, $timezone);
