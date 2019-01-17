@@ -12,7 +12,8 @@
         "issues": "https://github.com/the-kbA-team/sap-datetime/issues"
     },
     "keywords": [
-        "PHPSAP",
+        "phpsap",
+        "php-sap",
         "DateTime",
         "SAP",
         "week",
