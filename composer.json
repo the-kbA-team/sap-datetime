@@ -5,7 +5,9 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Gregor J."
+            "name": "Gregor J.",
+            "email": "gregor-j@users.noreply.github.com",
+            "role": "developer"
         }
     ],
     "support": {
