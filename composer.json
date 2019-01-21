@@ -3,6 +3,7 @@
     "description": "Extends PHP's DateTime class by SAP week, date and timestamp format.",
     "type": "library",
     "license": "MIT",
+    "abandoned": "php-sap/datetime",
     "authors": [
         {
             "name": "Gregor J.",
